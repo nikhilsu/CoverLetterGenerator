@@ -1,0 +1,26 @@
+{
+  "name": "coverlettergenerator",
+  "version": "1.0.0",
+  "description": "Tool used to generate a Cover letter from a GDoc Template (Uses Google Apps Script).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhilsu/CoverLetterGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikhilsu/CoverLetterGenerator/issues"
+  },
+  "homepage": "https://github.com/nikhilsu/CoverLetterGenerator#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0"
+  }
+}
