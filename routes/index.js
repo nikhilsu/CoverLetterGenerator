@@ -6,7 +6,7 @@ const httpRequest = require('request');
 var app = express();
 
 app.get('/', function (request, response) {
-    response.render('index');
+    response.render('index', {success: true});
 });
 
 
@@ -20,7 +20,7 @@ app.post('/', function (request, response) {
             position: request.sanitize('position').escape().trim(),
             company: request.sanitize('company').escape().trim(),
         };
-        response.contentType("application/pdf");
+        response.contentType('application/pdf');
 
         appsScriptService.generateCoverLetter(coverLetterInfo)
             .then(function (result) {
@@ -28,9 +28,11 @@ app.post('/', function (request, response) {
                 googleDriveService.downloadFile(generatedFileInfo, response);
             });
     } else {
-        var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
+        var error_hash = {};
+        errors.forEach(err => error_hash[err.param] = err.msg);
         response.render('index', {
-            error: error_msg,
+            success: false,
+            error: error_hash,
             position: request.body.position,
             company: request.body.company,
         })

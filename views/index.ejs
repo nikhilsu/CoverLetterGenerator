@@ -3,19 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        * {
+            font-size: 22px;
+            font-family: verdana, serif;
+        }
+
+        input, button {
+            font-size: 20px;
+        }
+
+        input {
+            width: 300px;
+            height: 35px;
+            display: inline-block;
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: 1px solid #cccccc;
+        }
+
+        button {
+            width: 320px;
+            padding: 10px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            margin-top: 15px;
+            background-color: rgb(85, 182, 202);
+            color: white;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        div.input {
+            margin: 20px;
+        }
+
+        .error {
+            border-color: red;
+        }
+
+        .errorMessage {
+            color: red;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .heading {
+            margin: 20px auto 50px;
+        }
+
+        .container {
+            width: 380px;
+            text-align: center;
+            padding: 20px;
+            margin: 40px auto;
+            border: 1px black solid;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <p>Cover Letter Generator</p>
-
-    <% if(error) { %>
-
-    <% } %>
-
+<div class="container">
+    <p class="heading">Cover Letter Generator</p>
 
     <form action="/" method="post">
-        <input type="text" placeholder="position" name="position">
-        <input type="text" placeholder="company" name="company">
-        <input type="submit" name="download">
+        <div class="input">
+            <input type="text" placeholder="Position" name="position" class="<% if (!success && error.position) {
+                "error"
+            } %>"/>
+            <% if (!success && error.position) { %>
+                <p class="errorMessage">
+                    <%= error.position %>
+                </p>
+            <% } %>
+        </div>
+        <div class="input">
+            <input type="text" placeholder="Company" name="company" class="<% if (!success && error.company) {
+                "error"
+            } %>"/>
+            <% if (!success && error.company) { %>
+                <p class="errorMessage">
+                    <%= error.company %>
+                </p>
+            <% } %>
+        </div>
+        <div class="input">
+            <button type="submit">Download</button>
+        </div>
     </form>
+</div>
 </body>
 </html>
