@@ -1,13 +1,16 @@
 var express = require('express');
+var appsScriptService = require('../service/appsScriptService');
+var googleDriveService = require('../service/googleDriveService');
+const httpRequest = require('request');
+
 var app = express();
-var path = require('path');
 
 app.get('/', function (request, response) {
-    response.sendFile(path.join(__dirname + '/../views/index.html'));
+    response.render('index');
 });
 
 
-app.post('/add', function (request, response) {
+app.post('/', function (request, response) {
     request.assert('position', 'Position is required').notEmpty();
     request.assert('company', 'Company is required').notEmpty();
 
@@ -17,16 +20,21 @@ app.post('/add', function (request, response) {
             position: request.sanitize('position').escape().trim(),
             company: request.sanitize('company').escape().trim(),
         };
-        // call Google Apps Script API
+        response.contentType("application/pdf");
+
+        appsScriptService.generateCoverLetter(coverLetterInfo)
+            .then(function (result) {
+                var generatedFileInfo = JSON.parse(result);
+                googleDriveService.downloadFile(generatedFileInfo, response);
+            });
     } else {
         var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
-        // request.flash('error', error_msg);
-        response.render('store/add', {
+        response.render('index', {
+            error: error_msg,
             position: request.body.position,
             company: request.body.company,
         })
     }
 });
-
 
 module.exports = app;

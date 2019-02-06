@@ -3,6 +3,7 @@ var app = express();
 
 var expressValidator = require('express-validator');
 app.use(expressValidator());
+app.set('view engine', 'ejs');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
