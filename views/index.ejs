@@ -5,12 +5,16 @@
     <title>Home</title>
     <style>
         * {
-            font-size: 22px;
+            font-size: 23px;
             font-family: verdana, serif;
         }
 
+        body {
+            margin: 0;
+        }
+
         input, button {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         input {
@@ -33,6 +37,10 @@
             color: white;
         }
 
+        button:focus {
+            outline: none;
+        }
+
         form {
             margin-top: 10px;
         }
@@ -41,11 +49,7 @@
             margin: 20px;
         }
 
-        .error {
-            border-color: red;
-        }
-
-        .errorMessage {
+        .error-message {
             color: red;
             margin: 10px;
             font-size: 15px;
@@ -64,9 +68,30 @@
             border: 1px black solid;
             border-radius: 5px;
         }
+
+        .headline-error {
+            font-size: 18px;
+            background-color: red;
+            color: white;
+            padding: 12px 20px;
+            margin: 0;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        var hideHeadline = function () {
+            $('.headline-error').delay(3000).fadeOut(800);
+        };
+        $(document).ready(hideHeadline);
+        $(window).on("load", hideHeadline);
+    </script>
 </head>
 <body>
+
+<% if (headlineError) { %>
+    <div class="headline-error"> Something went wrong! try again later.</div>
+<% } %>
+
 <div class="container">
     <p class="heading">Cover Letter Generator</p>
 
@@ -74,10 +99,11 @@
         <div class="input">
             <input type="text" placeholder="Position" name="position"
             <% if (!success && error.position) { %>
-               style="border-color: red;"
-            <% } %> />
+                   style="border-color: red;"
+                    <% } %>
+            />
             <% if (!success && error.position) { %>
-                <p class="errorMessage">
+                <p class="error-message">
                     <%= error.position %>
                 </p>
             <% } %>
@@ -85,10 +111,11 @@
         <div class="input">
             <input type="text" placeholder="Company" name="company"
             <% if (!success && error.company) { %>
-               style="border-color: red;"
-            <% } %> />
+                   style="border-color: red;"
+                    <% } %>
+            />
             <% if (!success && error.company) { %>
-                <p class="errorMessage">
+                <p class="error-message">
                     <%= error.company %>
                 </p>
             <% } %>

@@ -6,19 +6,29 @@ let googleDriveService = {
         var downloadUrl = generatedFileInfo.downloadUrl;
         var fileId = generatedFileInfo.fileCopyId;
 
-        request.get(downloadUrl).on('response', function (_) {
-            googleDriveService.deleteFile(fileId)
-        }).pipe(httpResponse);
+        request.get(downloadUrl)
+            .on('response', function (_) {
+                googleDriveService.deleteFile(fileId, httpResponse)
+            })
+            .on('error', function (_) {
+                httpResponse.render('index', {
+                    headlineError: true,
+                    success: true,
+                });
+            })
+            .pipe(httpResponse);
     },
 
-    deleteFile: function (fileId) {
+    deleteFile: function (fileId, httpResponse) {
         deleteUrl = 'https://script.google.com/macros/s/AKfycbzXOgqj6a1WxijVwhrPm7uV5coMsZSmaBQPFPVzPO9-SK-LJOz-/exec?';
         params = {'fileId': fileId};
-        request.get(deleteUrl + queryString.stringify(params), function (error, response, body) {
-            console.log('error:', error);
-            console.log('statusCode:', response && response.statusCode);
-            console.log('body:', body);
-        });
+        request.get(deleteUrl + queryString.stringify(params))
+            .on('error', function (_) {
+                httpResponse.render('index', {
+                    headlineError: true,
+                    success: true,
+                });
+            });
     }
 };
 

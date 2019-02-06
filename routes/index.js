@@ -6,7 +6,7 @@ const httpRequest = require('request');
 var app = express();
 
 app.get('/', function (request, response) {
-    response.render('index', {success: true});
+    response.render('index', {success: true, headlineError: false});
 });
 
 
@@ -20,12 +20,20 @@ app.post('/', function (request, response) {
             position: request.sanitize('position').escape().trim(),
             company: request.sanitize('company').escape().trim(),
         };
-        response.contentType('application/pdf');
 
         appsScriptService.generateCoverLetter(coverLetterInfo)
             .then(function (result) {
+                response.contentType('application/pdf');
                 var generatedFileInfo = JSON.parse(result);
                 googleDriveService.downloadFile(generatedFileInfo, response);
+            })
+            .catch(function (_) {
+                response.render('index', {
+                    headlineError: true,
+                    success: true,
+                    position: request.body.position,
+                    company: request.body.company
+                });
             });
     } else {
         var error_hash = {};
