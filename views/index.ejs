@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cover Letter</title>
+    <title>Cover Letter Gen</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="javascript/index.js" type="text/javascript"></script>
@@ -20,7 +25,7 @@
         <div class="input">
             <input type="text" placeholder="Position" name="position" value="<%= locals.position %>"
             <% if (locals.error && locals.error.position) { %>
-                   style="border-color: red;" />
+                   class="error-input" />
             <p class="error-message">
                 <%= error.position %>
             </p>
@@ -31,7 +36,7 @@
         <div class="input">
             <input type="text" placeholder="Company" name="company" value="<%= locals.company %>"
             <% if (locals.error && locals.error.company) { %>
-                   style="border-color: red;"/>
+                   class="error-input"/>
             <p class="error-message">
                 <%= error.company %>
             </p>

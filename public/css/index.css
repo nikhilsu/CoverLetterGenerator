@@ -27,11 +27,11 @@ button {
     -moz-border-radius: 5px;
     border-radius: 5px;
     margin-top: 20px;
-    background-color: rgb(85, 182, 202);
+    background-color: #00AA00;
     color: white;
 }
 
-button:focus {
+input:focus, button:focus {
     outline: none;
 }
 
@@ -69,4 +69,8 @@ div.input {
     color: white;
     padding: 12px 20px;
     margin: 0;
+}
+
+.error-input {
+    border-color: red;
 }

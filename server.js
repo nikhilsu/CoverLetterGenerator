@@ -14,7 +14,6 @@ app.use(express.static(__dirname + '/public'));
 var index = require('./routes/index');
 app.use('/', index);
 
-
 var port = process.env.PORT || 4000;
 app.listen(port, function () {
     console.log('Server running on http://localhost:' + port)
