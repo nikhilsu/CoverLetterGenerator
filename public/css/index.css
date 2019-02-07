@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    background-color: #f4fbf1;
 }
 
 input, button {
@@ -29,6 +30,11 @@ button {
     margin-top: 20px;
     background-color: #00AA00;
     color: white;
+    cursor: pointer;
+}
+
+button:hover, button:focus {
+    background-color: rgba(0, 170, 0, 0.8);
 }
 
 input:focus, button:focus {
@@ -61,6 +67,7 @@ div.input {
     margin: 40px auto;
     border: 1px black solid;
     border-radius: 5px;
+    background-color: white;
 }
 
 .headline-error {
