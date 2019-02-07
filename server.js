@@ -15,7 +15,7 @@ var index = require('./routes/index');
 app.use('/', index);
 
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 4000;
 app.listen(port, function () {
     console.log('Server running on http://localhost:' + port)
 });

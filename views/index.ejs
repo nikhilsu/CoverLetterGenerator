@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Cover Letter</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="javascript/index.js" type="text/javascript"></script>
 </head>
 <body>
 
-<% if (headlineError) { %>
+<% if (locals.headlineError) { %>
     <div class="headline-error"> Something went wrong! try again later.</div>
 <% } %>
 
@@ -18,27 +18,25 @@
 
     <form action="/" method="post">
         <div class="input">
-            <input type="text" placeholder="Position" name="position"
-            <% if (!success && error.position) { %>
-                   style="border-color: red;"
-                    <% } %>
-            />
-            <% if (!success && error.position) { %>
-                <p class="error-message">
-                    <%= error.position %>
-                </p>
+            <input type="text" placeholder="Position" name="position" value="<%= locals.position %>"
+            <% if (locals.error && locals.error.position) { %>
+                   style="border-color: red;" />
+            <p class="error-message">
+                <%= error.position %>
+            </p>
+            <% } else { %>
+                />
             <% } %>
         </div>
         <div class="input">
-            <input type="text" placeholder="Company" name="company"
-            <% if (!success && error.company) { %>
-                   style="border-color: red;"
-                    <% } %>
-            />
-            <% if (!success && error.company) { %>
-                <p class="error-message">
-                    <%= error.company %>
-                </p>
+            <input type="text" placeholder="Company" name="company" value="<%= locals.company %>"
+            <% if (locals.error && locals.error.company) { %>
+                   style="border-color: red;"/>
+            <p class="error-message">
+                <%= error.company %>
+            </p>
+            <% } else { %>
+                />
             <% } %>
         </div>
         <div class="input">

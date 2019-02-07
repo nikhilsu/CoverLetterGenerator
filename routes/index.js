@@ -6,7 +6,7 @@ const httpRequest = require('request');
 var app = express();
 
 app.get('/', function (request, response) {
-    response.render('index', {success: true, headlineError: false});
+    response.render('index');
 });
 
 
@@ -30,7 +30,6 @@ app.post('/', function (request, response) {
             .catch(function (_) {
                 response.render('index', {
                     headlineError: true,
-                    success: true,
                     position: request.body.position,
                     company: request.body.company
                 });
@@ -39,7 +38,6 @@ app.post('/', function (request, response) {
         var error_hash = {};
         errors.forEach(err => error_hash[err.param] = err.msg);
         response.render('index', {
-            success: false,
             error: error_hash,
             position: request.body.position,
             company: request.body.company,

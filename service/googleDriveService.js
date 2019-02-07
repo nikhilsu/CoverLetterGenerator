@@ -12,8 +12,7 @@ let googleDriveService = {
             })
             .on('error', function (_) {
                 httpResponse.render('index', {
-                    headlineError: true,
-                    success: true,
+                    headlineError: true
                 });
             })
             .pipe(httpResponse);
@@ -25,8 +24,7 @@ let googleDriveService = {
         request.get(deleteUrl + queryString.stringify(params))
             .on('error', function (_) {
                 httpResponse.render('index', {
-                    headlineError: true,
-                    success: true,
+                    headlineError: true
                 });
             });
     }
